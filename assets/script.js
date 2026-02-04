@@ -17,18 +17,28 @@ const slides = [
 	}
 ]
 
+
 // Déclaration des constantes
 const arrowRight = document.querySelector(".arrow_right");
 const arrowLeft = document.querySelector(".arrow_left");
+const dots = document.querySelector(".dots"); // Sélection de la div .dots qui servira de conteneur aux bullet points (élément parent)
 
+// Gestion des flêches
 // Ajout d'un event listener sur la flèche droite
 arrowRight.addEventListener("click", function (e) {
   console.log(this.className); // Affiche le nom de la classe
   console.log(e.currentTarget === this); // Vérifie que l'élément cliqué est celui qui écoute l'événement (true)
 });
-
 // Ajout d'un event listener sur la flèche gauche
 arrowLeft.addEventListener("click", function (e) {
   console.log(this.className);
   console.log(e.currentTarget === this);
 });
+
+// Gestion des bulles (bullet du slider)
+// Début de la boucle pour répéter la création et l'ajout des bulles en fonction du nombre de slides
+for (let i = 0; i < slides.length; i++) {
+	const newDot = document.createElement("div"); // Création d'un nouvel élément div qui représentera une bulle (dot)
+	newDot.className = "dot"; // Ajout de la classe CSS "dot" à la bulle pour qu'elle soit stylisée
+	dots.appendChild(newDot); // Insertion de la bulle dans le conteneur .dots
+}
