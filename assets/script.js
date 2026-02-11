@@ -40,5 +40,10 @@ arrowLeft.addEventListener("click", function (e) {
 for (let i = 0; i < slides.length; i++) {
 	const newDot = document.createElement("div"); // Création d'un nouvel élément div qui représentera une bulle (dot)
 	newDot.className = "dot"; // Ajout de la classe CSS "dot" à la bulle pour qu'elle soit stylisée
+	
+		// Ajout du style "sélectionné" sur le premier point (slide affichée au chargement)
+	if (i === 0) {
+		newDot.classList.add("dot_selected") // Ajoute la class spécifique au point actif
+}	
 	dots.appendChild(newDot); // Insertion de la bulle dans le conteneur .dots
 }
