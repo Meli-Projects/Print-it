@@ -17,23 +17,30 @@ const slides = [
 	}
 ]
 
+// index courant
+let indexTable = 0;
 
 // Déclaration des constantes
 const arrowRight = document.querySelector(".arrow_right");
 const arrowLeft = document.querySelector(".arrow_left");
 const dots = document.querySelector(".dots"); // Sélection de la div .dots qui servira de conteneur aux bullet points (élément parent)
+const bannerImg = document.querySelector(".banner-img"); //selection des images bannière
+const bannerText = document.querySelector("#banner p"); //selection des texte bannière
 
-// Gestion des flêches
-// Ajout d'un event listener sur la flèche droite
-arrowRight.addEventListener("click", function (e) {
-  console.log(this.className); // Affiche le nom de la classe
-  console.log(e.currentTarget === this); // Vérifie que l'élément cliqué est celui qui écoute l'événement (true)
-});
-// Ajout d'un event listener sur la flèche gauche
-arrowLeft.addEventListener("click", function (e) {
-  console.log(this.className);
-  console.log(e.currentTarget === this);
-});
+// fonction qui met à jour l'affichage (image + texte + dots) bannière
+function updateSlide() {
+  bannerImg.setAttribute( // MàJ image
+    "src",
+    "./assets/images/slideshow/" + slides[indexTable].image
+  );
+  
+  bannerText.innerHTML = slides[indexTable].tagLine; // MàJ texte
+
+  //MàJ dots
+  const allDots = document.querySelectorAll(".dot");
+  allDots.forEach((dot) => dot.classList.remove("dot_selected"));
+  allDots[indexTable].classList.add("dot_selected");
+}
 
 // Gestion des bulles (bullet du slider)
 // Début de la boucle pour répéter la création et l'ajout des bulles en fonction du nombre de slides
@@ -47,3 +54,27 @@ for (let i = 0; i < slides.length; i++) {
 }	
 	dots.appendChild(newDot); // Insertion de la bulle dans le conteneur .dots
 }
+
+// Gestion des flêches
+// Ajout d'un event listener sur la flèche droite
+arrowRight.addEventListener("click", function (e) {
+  console.log(this.className); // Affiche le nom de la classe
+  console.log(e.currentTarget === this); // Vérifie que l'élément cliqué est celui qui écoute l'événement (true)
+  
+  indexTable++; //défilement à droite
+  updateSlide();
+});
+// Ajout d'un event listener sur la flèche gauche
+arrowLeft.addEventListener("click", function (e) {
+  console.log(this.className);
+  console.log(e.currentTarget === this);
+
+  indexTable--; //défilement à gauche
+  updateSlide();
+
+});
+
+updateSlide();
+
+
+
